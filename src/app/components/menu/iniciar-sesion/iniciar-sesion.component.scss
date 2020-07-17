@@ -1,0 +1,29 @@
+.modal-content{
+    background-color: black;
+    color: white;
+    .modal-body{
+        padding: 50px 10px;
+    }
+    .olvidaste{
+        color: rgba(245, 245, 245, 0.589);
+        font-size: 13px;
+    }
+
+}
+
+.invalid{
+    box-shadow: 0px 0px 10px 2px red;
+    outline: none;
+    border-color: red;
+}
+
+.modal-dialog{
+    margin: 0 !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+}
+
+.usuarioNoExiste{
+    margin: 5px auto;
+}

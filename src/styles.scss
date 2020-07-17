@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root{
+    --color-buttons: red;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Rubik+Mono+One&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.bg-black{
+    background-color: black !important;
+    color: white;
+}
+
+.btn-page{
+    background-color: var(--color-buttons);
+    color: white;
+}
+
+.pointer{
+    cursor: pointer;
+}

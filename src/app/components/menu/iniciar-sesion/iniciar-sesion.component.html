@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <h5 class="modal-title text-center mb-4">Iniciar sesión</h5>
+                    <form [formGroup]="iniciarSesion" (ngSubmit)='prueba()' >
+                        <div class="form-group row">
+                            <label class='col-3 row align-items-center ml-0 mr-0' for="">Correo</label>
+                            <div class="col-9">
+                                <input type="text" name="email" class="form-control " placeholder="Correo" formControlName='correo' [ngClass]="{invalid: iniciarSesion.controls['correo'].invalid && iniciarSesion.controls['correo'].dirty}" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class='col-3 row align-items-center ml-0 mr-0' for="">Contraseña</label>
+                            <div class="col-9">
+                                <input type="password" name="password" class="form-control" placeholder="Contraseña" formControlName='contra' [ngClass]="{invalid: iniciarSesion.controls['contra'].invalid && iniciarSesion.controls['contra'].dirty}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button [disabled]='!iniciarSesion.valid' class="btn btn-danger btn-block">Iniciar sesión</button>
+                        </div>
+
+                        <div *ngIf="usuarioNoExiste" class='usuarioNoExiste'>
+                            No se han encontrado usuarios con los datos ingresados.
+                        </div>
+
+                        <div class="olvidaste text-right">
+                            <a>¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+        // Use above variables to manipulate the DOM
+    });
+</script>

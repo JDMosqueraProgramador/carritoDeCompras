@@ -1,0 +1,8 @@
+@function cantidadButtons($cant){
+    $width: (100% / $cant);
+    @return #{$width};
+}
+
+.productDetails{
+    margin: auto;
+}

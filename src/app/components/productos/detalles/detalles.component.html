@@ -1,0 +1,12 @@
+<div class="productDetails row">
+    <div class="carrousel">
+        <div class="imgSelected">
+            <img [src]="producto.imgPath[0]" alt="">
+        </div>
+        <div class="buttonsImgs">
+            <button *ngFor="let foto of producto.imgPath" [style.width]="widthButtons(numButtons)">
+                <img [src]="foto">
+            </button>
+        </div>
+    </div>
+</div>

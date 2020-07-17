@@ -1,0 +1,107 @@
+form{
+    width: 50%;
+    input, select{
+        margin-bottom: 1rem;
+    }
+    label{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.lineTemp{
+    display: flex;
+    width: 400px;
+    margin: 1px auto;
+    div{
+        padding: 5px;
+        font-size: 18px;
+        border: solid 3px black;
+        background: black;
+        border-radius: 100%;
+        &.active, &.ready{
+            color: white;
+            span{
+                background: black;
+            }
+        }
+        span{
+            background: white;
+            display: block;
+            border: solid 3px black;
+            border-radius: 100%;
+            padding: 10px 19px;
+            margin: auto;
+        }
+    }
+    .line{
+        background: white;
+        width: 100px;
+        border: solid 3px black;
+        border-radius: 0;
+        height: 5px;
+        margin: 25px 0;
+        border-left: 0;
+        border-right: 0;
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            background-color: black;
+            transition: 2s;
+            top: 0;
+            left: 0;
+        }
+        &.lineTrue{
+            &::before{
+                width: 100%;
+            }
+        }
+    }
+}
+
+.fotosApa{
+    min-height: 200px;
+    img{
+        width: 120px;
+        height: 150px;
+        object-fit: contain;
+        margin: 5px;
+        border: solid 1px black;
+        border-radius: 10px;
+    }
+}
+
+.checkboxes{
+    border: solid 1px black;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding-left: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    input{
+        margin: 10px 10px;
+    }
+    label{
+        padding: 5px 30px;
+        border-left: solid 1px black;
+        &::before{
+            margin: 5px -3px;
+            top: 1rem !important;
+            left: -1.1rem !important;
+        }
+        &::after{
+            top: 1.3rem;
+            left: -1.3rem;
+        }
+    }
+
+
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #dc3545;
+    background-color: #dc3545;
+}

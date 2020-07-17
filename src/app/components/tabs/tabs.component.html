@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+        <li *ngFor="let tab of tabs">
+            <button (click)="tabsFunction(tab.id)">{{ tab.buttonTab }}</button>
+        </li>
+    </ul>
+
+    <div [ngSwitch]="activateTab">
+        <ng-container *ngFor="let tab of tabs">
+            <div  *ngSwitchCase="tab.id">{{ tab.content }}</div>
+        </ng-container>
+
+        <div *ngSwitchDefault>output2</div>
+    </div>
+</nav>

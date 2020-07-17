@@ -1,0 +1,43 @@
+<div class="container">
+
+    <ng-template #noProducts>
+        <div class="noProductos">
+            No hay productos disponibles
+        </div>
+    </ng-template>
+
+    <ng-container *ngIf="productosService.productos.length > 0 else noProducts">
+        <div *ngFor="let producto of productosService.productos" class='card-product'
+            [attr.data-category]="producto.categoria" [attr.data-idproduct]='producto.id'>
+            <div class='image'>
+                <img [src]='producto.imgPath[0]'>
+            </div>
+            <div class='info'>
+                <div class='name-product'>
+                    {{producto.nombre}}  <a [routerLink]="['detalles', producto.id]"><svg class="bi bi-arrow-up-right-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6.707l-4.146 4.147a.5.5 0 0 1-.708-.708L9.293 6H6.5a.5.5 0 0 1 0-1z"/>
+                      </svg></a>
+                </div>
+
+                <div class='descripcion'>
+                    Tallas disponibles: <span *ngFor="let talla of producto.tallas">{{ talla.talla }}</span> <br><br>
+                    Género: {{ producto.genero }} <br><br>
+                    Colores:
+
+                    <div class="coloresProduct" *ngFor="let color of producto.colores" [style.background]="color"></div>
+
+                </div>
+
+                <!-- <div class="estado" [ngClass]="{disponible: producto.disponible, agotado: !producto.disponible}">ee</div> -->
+
+                <div class='precio'>
+                    precio: <span>{{producto.precio | currency }}</span>
+                </div>
+
+                <button (click)="agregarCarito($event)">Añadir al carrito <i
+                        class='fas fa-cart-arrow-down'></i></button>
+
+            </div>
+        </div>
+    </ng-container>
+</div>

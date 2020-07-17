@@ -1,0 +1,32 @@
+.thead-black {
+    background-color: black;
+
+    th {
+        color           : #fff;
+        background-color: black;
+        border-color    : black;
+    }
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.col-sm-3 {
+    color           : #fff;
+    background-color: black;
+
+    * {
+        color           : #fff;
+        background-color: black;
+    }
+}
+
+app-menu-productos {
+    height   : 100%;
+    position : fixed;
+    top      : 10%;
+    width    : 24%;
+    max-width: 25%;
+    padding  : 30px;
+}
