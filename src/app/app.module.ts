@@ -26,6 +26,7 @@ import { AdminComponent } from '@components/Admin/admin/admin.component';
 import { ProductosAdminComponent } from '@components/Admin/productos-admin/productos-admin.component';
 import { MenuProductosComponent } from './components/Admin/menu-productos/menu-productos.component';
 import { SubitFotosDirective } from './directives/subit-fotos.directive';
+import { ViewProductosComponent } from './components/Admin/view-productos/view-productos.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { SubitFotosDirective } from './directives/subit-fotos.directive';
         AgregarProductoComponent,
         ProductosAdminComponent,
         MenuProductosComponent,
-        SubitFotosDirective
+        SubitFotosDirective,
+        ViewProductosComponent
     ],
     imports: [
         BrowserModule,

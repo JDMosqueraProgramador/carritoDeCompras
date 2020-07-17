@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <button [disabled]="tallasSelect == 0 || !cantidadInvalida()" type="submit"
-                    class="btn btn-danger btn-block">Terminar</button>
+                    class="btn btn-danger btn-block" (click)="enviarDatos()">Terminar</button>
             </form>
         </div>
     </div>

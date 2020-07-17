@@ -1,12 +1,12 @@
 export interface Producto{
     id: number,
     nombre: string,
-    tallas: string,
+    tallas: any,
     genero: string,
     descripcion: string,
     colores: string,
     precio: number,
     categoria: string,
-    imgPath: string,
+    imgPath: any,
     disponible: boolean
 }

@@ -8,14 +8,10 @@ import { Producto } from '@interfaces/producto.interface';
 })
 export class ProductosAdminComponent implements OnInit {
 
-    productos: Producto[] = [];
-    constructor(private productosService: ProductosService) { }
+    constructor() { }
 
     ngOnInit() {
-        this.productosService.productosReturn().subscribe(productos => {
-            this.productos = productos;
-        });
-        console.log(this.productos);
+
     }
 
 }

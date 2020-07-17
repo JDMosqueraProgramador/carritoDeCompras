@@ -2,3 +2,15 @@
     color: #fff;
     background-color: #bd2130 !important;
 }
+.btn-outline-danger{
+    &.button-selected{
+        background-color: transparent;
+    }
+}
+
+a{
+    color: white;
+    &:hover{
+        color: whitesmoke;
+    }
+}

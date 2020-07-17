@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { HttpBackend } from '@angular/common/http';
 import { TallasService } from '@services/tallas.service';
 import { Talla } from '@interfaces/talla.interface';
+import { Producto } from '@interfaces/producto.interface';
 
 
 @Component({
-    selector: "agregar-producto-app",
+    // selector: "agregar-producto-app",
     templateUrl: './agregar-producto.component.html',
     styleUrls: ['./agregar-producto.component.scss']
 })
@@ -25,7 +25,10 @@ export class AgregarProductoComponent implements OnInit {
     ngOnInit() {
         this.tallasRecived();
         this.formOneValidate();
-        // this.formThreeValidate();
+
+        this.form1.valueChanges.subscribe(data => {
+            localStorage.setItem("dataInputs", JSON.stringify(data as Producto));
+        });
     }
 
     // Services ---------------------------------------------
@@ -49,6 +52,7 @@ export class AgregarProductoComponent implements OnInit {
 
         console.log(this.form1.errors);
 
+        // Control -> Para agregar nueva categoría
         this.form1.controls['categoria'].valueChanges.subscribe(val => {
             if (val == this.otraCategoria && !this.form1.contains['otraCate']) {
                 this.form1.addControl("otraCate", this.formBuild.control('', [Validators.required]));
@@ -57,27 +61,35 @@ export class AgregarProductoComponent implements OnInit {
             }
         });
 
-        // this.selectCategoria = this.form1.controls['categoria'].value;
+        // Local Storage Practice
 
+        if(localStorage.getItem("dataInputs")){
+            let confirmacion: boolean = confirm("¿Desea continuar con el producto que estaba agregando anteriormente?");
+
+            if(confirmacion == true){
+                let dataAnterior = JSON.parse(localStorage.getItem("dataInputs"));
+                console.log(dataAnterior);
+                for(let llave in dataAnterior){
+                    this.form1.controls[llave].setValue(dataAnterior[llave]);
+                }
+            }else{
+                localStorage.clear();
+            }
+        }
     }
 
     // Form #2, Fotos --------------------------------------------
 
     mostrarFotos(e: any) {
         var fotos = e.target.files;
-        console.log(fotos[0]);
         if (fotos.length > 0) {
             for (let foto of fotos) {
-                console.log(this.verificarExtension(foto));
-
                 if (this.verificarExtension(foto)) {
                     let fotoRuta = this.sanit.bypassSecurityTrustUrl(window.URL.createObjectURL(foto));
                     this.fotosSubidas.push(fotoRuta);
                 }
             }
         }
-
-        console.log(this.fotosSubidas);
     }
 
     verificarExtension(foto: File): boolean {
@@ -137,5 +149,12 @@ export class AgregarProductoComponent implements OnInit {
         }else{
             return false;
         }
+    }
+
+    enviarDatos(){
+        let objectProduct : Producto = this.form1.value as Producto;
+        objectProduct.tallas = this.tallasSelect;
+        objectProduct.imgPath = this.fotosSubidas;
+        console.log(objectProduct);
     }
 }

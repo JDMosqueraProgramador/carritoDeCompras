@@ -11,6 +11,7 @@ import { ProductosComponent } from '@components/productos/productos.component';
 import { AdminComponent } from '@components/Admin/admin/admin.component';
 import { AgregarProductoComponent } from '@components/Admin/agregar-producto/agregar-producto.component';
 import { ProductosAdminComponent } from '@components/Admin/productos-admin/productos-admin.component';
+import { ViewProductosComponent } from '@components/Admin/view-productos/view-productos.component';
 
 
 const routes: Routes = [
@@ -26,8 +27,10 @@ const routes: Routes = [
     // Administrador
 
     {path: 'admin', component: AdminComponent, children: [
-        {path: 'productos', component: ProductosAdminComponent},
-        {path: 'agregar-producto', component: AgregarProductoComponent}
+        {path: 'productos', component: ProductosAdminComponent, children: [
+            {path: '', component: ViewProductosComponent},
+            {path: 'agregarProducto', component: AgregarProductoComponent}
+        ]},
         // {path: 'agregarProducto', component: AgregarProductoComponent}
     ]},
 
