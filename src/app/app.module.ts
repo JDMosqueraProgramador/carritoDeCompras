@@ -16,6 +16,8 @@ import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.com
 
 import { ProductosService } from '@services/productos.service';
 import { UsuariosService } from '@services/usuarios.service';
+import { CarritoService } from '@services/carrito.service';
+
 
 import { PruebaPipe } from './pipes/prueba.pipe';
 import { DetallesComponent } from './components/productos/detalles/detalles.component';
@@ -62,7 +64,8 @@ import { CarritoComponent } from './components/menu/carrito/carrito.component';
     ],
     providers: [
         ProductosService,
-        UsuariosService
+        UsuariosService,
+        CarritoService
     ],
     bootstrap: [AppComponent],
     exports: [MenuComponent]
