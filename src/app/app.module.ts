@@ -27,6 +27,7 @@ import { ProductosAdminComponent } from '@components/Admin/productos-admin/produ
 import { MenuProductosComponent } from './components/Admin/menu-productos/menu-productos.component';
 import { SubitFotosDirective } from './directives/subit-fotos.directive';
 import { ViewProductosComponent } from './components/Admin/view-productos/view-productos.component';
+import { CarritoComponent } from './components/menu/carrito/carrito.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ViewProductosComponent } from './components/Admin/view-productos/view-p
         ProductosAdminComponent,
         MenuProductosComponent,
         SubitFotosDirective,
-        ViewProductosComponent
+        ViewProductosComponent,
+        CarritoComponent
     ],
     imports: [
         BrowserModule,

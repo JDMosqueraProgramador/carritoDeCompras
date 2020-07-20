@@ -9,6 +9,7 @@ import { ProductosService } from '@services/productos.service';
 })
 export class ProductoComponent implements OnInit{
 
+    productoProximo: any = null;
     constructor(private productosService: ProductosService) {
     }
 
@@ -23,8 +24,9 @@ export class ProductoComponent implements OnInit{
         console.log(this.productosService.productos);
     }
 
-    agregarCarito(event: any){
-        console.log(event.path[1]);
+    agregarCarito(event: any, prod: Producto){
+        this.productoProximo = prod;
+        console.log(event);
     }
 
 }

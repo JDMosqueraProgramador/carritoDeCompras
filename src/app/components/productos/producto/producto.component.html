@@ -14,9 +14,12 @@
             </div>
             <div class='info'>
                 <div class='name-product'>
-                    {{producto.nombre}}  <a [routerLink]="['detalles', producto.id]"><svg class="bi bi-arrow-up-right-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6.707l-4.146 4.147a.5.5 0 0 1-.708-.708L9.293 6H6.5a.5.5 0 0 1 0-1z"/>
-                      </svg></a>
+                    {{producto.nombre}} <a [routerLink]="['detalles', producto.id]"><svg
+                            class="bi bi-arrow-up-right-circle-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6.707l-4.146 4.147a.5.5 0 0 1-.708-.708L9.293 6H6.5a.5.5 0 0 1 0-1z" />
+                        </svg></a>
                 </div>
 
                 <div class='descripcion'>
@@ -34,10 +37,56 @@
                     precio: <span>{{producto.precio | currency }}</span>
                 </div>
 
-                <button (click)="agregarCarito($event)">Añadir al carrito <i
-                        class='fas fa-cart-arrow-down'></i></button>
-
+                <button (click)="agregarCarito($event, producto)" data-toggle="modal"
+                    data-target="#cantidadAndTalla">Añadir al
+                    carrito
+                    <i class='fas fa-cart-arrow-down'></i>
+                </button>
             </div>
         </div>
     </ng-container>
+
+
+    <div *ngIf="productoProximo != null" id="cantidadAndTalla" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form>
+                        <h2 class="text-center font-weight-bold">Agregar {{ productoProximo.nombre }} al carrito</h2>
+                        <hr>
+
+                        <div class="row pt-2 pb-2">
+
+                            <div class="col-sm-6">
+                                <img [src]="productoProximo.imgPath[0]" class="img-fluid">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group row ml-0 mt-4">
+                                    <label for="" class="mr-2 mb-0 row align-items-center">Cantidad</label>
+                                    <input type="number" placeholder="cantidad" class="form-control col-sm-8">
+                                </div>
+                                <hr>
+                                <div>
+                                    <h6 class="text-center mb-3 font-weight-bold">Selecciona la talla que deseas pedir
+                                    </h6>
+                                    <div class="form-check" *ngFor="let tallaDispo of productoProximo.tallas">
+                                        <input class="form-check-input" type="radio" name="tallaPedir"
+                                            [value]="tallaDispo.id" id="'talla'+tallaDispo.id">
+                                        <label class="form-check-label" [for]="'talla'+tallaDispo.id">Talla
+                                            {{ tallaDispo.talla }} (para {{ tallaDispo.ref }})</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-danger btn-block">Agregar al carrito</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin modal -->
 </div>
