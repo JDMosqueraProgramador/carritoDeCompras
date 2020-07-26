@@ -20,4 +20,8 @@ export class ProductosService {
     productoDelete(id: number): Observable<Producto[]>{
         return this.http.put<Producto[]>(`${this.rutaHttp}productosJson.php`, id);
     }
+
+    productoAdd(producto: Producto): Observable<any>{
+        return this.http.post<any>(`${this.rutaHttp}productosJson.php`, producto);
+    }
 }

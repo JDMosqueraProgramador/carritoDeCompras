@@ -46,13 +46,12 @@
         </div>
     </ng-container>
 
-
     <div *ngIf="productoProximo != null" id="cantidadAndTalla" class="modal fade" tabindex="-1" role="dialog"
         aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form>
+                    <form [formGroup]="formAgregarAlCarrito" (ngSubmit)="agregarAlCarritoFinal()">
                         <h2 class="text-center font-weight-bold">Agregar {{ productoProximo.nombre }} al carrito</h2>
                         <hr>
 
@@ -65,7 +64,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group row ml-0 mt-4">
                                     <label for="" class="mr-2 mb-0 row align-items-center">Cantidad</label>
-                                    <input type="number" placeholder="cantidad" class="form-control col-sm-8">
+                                    <input type="number" placeholder="cantidad" class="form-control col-sm-8" formControlName="cantidad">
                                 </div>
                                 <hr>
                                 <div>
@@ -73,7 +72,7 @@
                                     </h6>
                                     <div class="form-check" *ngFor="let tallaDispo of productoProximo.tallas">
                                         <input class="form-check-input" type="radio" name="tallaPedir"
-                                            [value]="tallaDispo.id" id="'talla'+tallaDispo.id">
+                                            [value]="tallaDispo.id" id="'talla'+tallaDispo.id" formControlName="tallaPedir">
                                         <label class="form-check-label" [for]="'talla'+tallaDispo.id">Talla
                                             {{ tallaDispo.talla }} (para {{ tallaDispo.ref }})</label>
                                     </div>
@@ -81,7 +80,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-danger btn-block">Agregar al carrito</button>
+                        <button [disabled]="formAgregarAlCarrito.invalid" class="btn btn-danger btn-block" type="submit">Agregar al carrito</button>
                     </form>
 
                 </div>

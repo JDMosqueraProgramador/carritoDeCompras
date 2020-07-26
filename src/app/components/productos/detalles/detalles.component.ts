@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '@services/productos.service';
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from '@interfaces/producto.interface';
-import { viewClassName } from '@angular/compiler';
 
 @Component({
     templateUrl: './detalles.component.html',
@@ -16,18 +15,22 @@ export class DetallesComponent implements OnInit {
     id = this.activRoute.snapshot.params.ref;
 
     ngOnInit() {
-        console.log(this.id);
-        this.producto = this.productosService.productos.find(producto => {
-            return producto.id == this.id
+
+        this.productosService.productosReturn().subscribe(productosDelServicio => {
+            this.productosService.productos = productosDelServicio;
+
+            this.producto = this.productosService.productos.find(producto => {
+                producto.imgPath = JSON.parse(producto.imgPath);
+                return producto.id == this.id
+            });
+            this.numButtons = this.producto.imgPath.length;
+
         });
 
-        this.numButtons = document.getElementsByTagName('button').length;
-
-        console.log("Producto:", this.producto);
     }
 
-    widthButtons(num: number): string{
-        var qq = 100/ num;
-        return `${qq} + %`;
+    widthButtons(num: number): string {
+        var qq = 100 / num;
+        return `${qq}%`;
     }
 }

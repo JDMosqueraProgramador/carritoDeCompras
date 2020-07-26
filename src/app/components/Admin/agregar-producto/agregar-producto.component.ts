@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { TallasService } from '@services/tallas.service';
 import { Talla } from '@interfaces/talla.interface';
 import { Producto } from '@interfaces/producto.interface';
+import { ProductosService } from '@services/productos.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AgregarProductoComponent implements OnInit {
     fotosSubidas: SafeUrl[] = [];
     tallas: Talla[];
     tallasSelect: any[] = [];
-    constructor(private formBuild: FormBuilder, private sanit: DomSanitizer, private tallasService: TallasService) { }
+    constructor(private formBuild: FormBuilder, private sanit: DomSanitizer, private tallasService: TallasService, private productosService: ProductosService) { }
 
     ngOnInit() {
         this.tallasRecived();
@@ -29,6 +30,8 @@ export class AgregarProductoComponent implements OnInit {
         this.form1.valueChanges.subscribe(data => {
             localStorage.setItem("dataInputs", JSON.stringify(data as Producto));
         });
+
+
     }
 
     // Services ---------------------------------------------
@@ -87,6 +90,7 @@ export class AgregarProductoComponent implements OnInit {
                 if (this.verificarExtension(foto)) {
                     let fotoRuta = this.sanit.bypassSecurityTrustUrl(window.URL.createObjectURL(foto));
                     this.fotosSubidas.push(fotoRuta);
+                    localStorage.setItem("fotosForm", JSON.stringify(this.fotosSubidas));
                 }
             }
         }
@@ -155,6 +159,8 @@ export class AgregarProductoComponent implements OnInit {
         let objectProduct : Producto = this.form1.value as Producto;
         objectProduct.tallas = this.tallasSelect;
         objectProduct.imgPath = this.fotosSubidas;
-        console.log(objectProduct);
+        this.productosService.productoAdd(objectProduct).subscribe(data =>{
+            console.log(data);
+        });
     }
 }

@@ -1,32 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Producto } from '@interfaces/producto.interface';
+import { Component } from '@angular/core';
+import { CarritoService } from '@services/carrito.service';
+
 
 @Component({
     selector: 'app-carrito',
     templateUrl: './carrito.component.html',
     styleUrls: ['./carrito.component.scss']
 })
-export class CarritoComponent implements OnInit {
+export class CarritoComponent {
 
-    constructor() { }
-
-    get productosAgregados(): any[] {
-        return JSON.parse(localStorage.getItem("carritoProducts"));
-    }
-
-    get totalPagar(): number {
-        let total = 0;
-        let productosStorage = JSON.parse(localStorage.getItem("carritoProducts"));
-        for (let productoStrorage of productosStorage) {
-            total += productoStrorage.cantidad * productoStrorage.precio;
-        }
-        return total;
-
-    }
+    constructor(public carritoService: CarritoService) { }
+    productosAgregados = JSON.parse(localStorage.getItem("carritoProducts"));
+    totalPagar = this.carritoService.totalPagar;
 
     eliminarDelCarrito(id: number){
-        debugger
-        let productosStorage = JSON.parse(localStorage.getItem("carritoProducts"));
+        let productosStorage = this.carritoService.productosAgregados;
         console.log("Antes", productosStorage, id);
 
         for (let productoStrorage in productosStorage) {
@@ -37,8 +25,14 @@ export class CarritoComponent implements OnInit {
         }
         console.log("Despues", productosStorage);
         localStorage.setItem("carritoProducts", JSON.stringify(productosStorage));
+        this.productosAgregados = this.carritoService.productosAgregados;
     }
 
-    ngOnInit() {
+    cambiarCantidad(id: number, ev){
+        for(let producto in this.productosAgregados){
+            if(this.productosAgregados[producto].id == id){
+                this.productosAgregados[producto].canidad = ev.target.value;
+            }
+        }
     }
 }

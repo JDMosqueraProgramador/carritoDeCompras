@@ -15,7 +15,7 @@
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.precio | currency }}</td>
                 <td>{{ producto.talla }}</td>
-                <td><input class="form-control" type="number" [value]="producto.cantidad"></td>
+                <td><input class="form-control" type="number" [value]="producto.cantidad" min="1" (change)="cambiarCantidad(producto.id, $event)"></td>
                 <td><button class="btn btn-danger"><span aria-hidden="true" (click)="eliminarDelCarrito(producto.id)">&times;</span></button></td>
             </tr>
         </tbody>
